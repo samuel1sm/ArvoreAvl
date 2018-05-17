@@ -3,36 +3,28 @@
 #include "NodeList.h"
 
 using namespace std;
+template <class T>
 class DynamicList
 {
     public:
-        void inserir(string a)
+        void inserir(T a)
         {
             if(!head)
             {
-                head= new NodeList(a);
+                head= new NodeList<T>(a);
                 tail=head;
             }
             else
             {
-                inserir(head,a);
+                tail->setNoNext(new NodeList<T>(a));
+                tail=tail->getNoNext();
             }
         }
 
     private:
-        NodeList* head=NULL;
-        NodeList* tail=NULL;
+        NodeList<T>* head=NULL;
+        NodeList<T>* tail=NULL;
 
-        void inserir(NodeList* no,string a)
-        {
-            if(no->getNoNext())
-                inserir(no->getNoNext(),a);
-            else
-            {
-                no->setNoNext(new NodeList(a));
-                tail=no->getNoNext();
-            }
-        }
 };
 
 #endif // DYNAMICLIST_H

@@ -2,22 +2,24 @@
 #define NODELIST_H
 
 using namespace std;
+template <class T>
+
 class NodeList
 {
     public:
-        NodeList(string f) {
+        NodeList(T f) {
             frase=f;
             noNext=NULL;
         }
 
-        NodeList* getNoNext(){return noNext;}
-        string getFrase(){return frase; }
+        NodeList<T>* getNoNext(){return noNext;}
+        T getFrase(){return frase; }
         void setNoNext(NodeList* a ){noNext =a;}
-        void setFrase(string a){frase = a; }
+        void setFrase(T a){frase = a; }
 
     private:
         NodeList* noNext;
-        string frase;
+        T frase;
 };
 
 #endif // NODELIST_H

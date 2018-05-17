@@ -19,7 +19,7 @@ public:
 
         myfile.close();
     }
-    DynamicList read()
+    DynamicList<string> read()
     {
         string line;
         ifstream myfile ("texto.txt");
@@ -30,15 +30,16 @@ public:
                 dl.inserir(line);
             }
             myfile.close();
+
+            return dl;
         }
 
-        return dl;
 
     }
 
 
 private:
-    DynamicList dl;
+    DynamicList<string> dl;
 
 
 };
