@@ -1,10 +1,6 @@
 #ifndef ABINARY_H
 #define ABINARY_H
 #include "Node.hpp"
-#include "DynamicList.h"
-#include <string.h>
-#include "NodeList.h"
-#include "TreeDAO.h"
 
 using namespace std;
 class ABinary
@@ -12,91 +8,167 @@ class ABinary
 public:
     ABinary() {}
 
-    void insertNewNode(string a)
+    void insertNode(string a)
     {
-        if(!root)
-            root=new Node(a);
-        else
-            insertNewNode(a,root);
-
+        root=insertNode(root,a);
     }
-    void setList()
+    void a()
     {
-        TreeDAO td;
-        NodeList<string>* aux = td.read().getHead();
-        while(aux!=NULL)
-        {
-            tamanhoFrase=aux->getFrase().length();
-            char aux2[tamanhoFrase];
-            strcpy(aux2,aux->getFrase().c_str());
-            fraseParaPalavra(aux2);
 
-            aux=aux->getNoNext();
-        }
+        a(root);
 
     }
 
-    void printLista(){
-        NodeList<string>* aux = dl.getHead();
-        while(aux!=NULL)
-        {
-            cout<<aux->getFrase()<<endl;
-            aux=aux->getNoNext();
-        }
+     void a(Node* node)
+    {
+        if(node->getLeft())
+            a(node->getLeft());
+        if(node->getRight())
+            a(node->getRight());
+        cout<<node->getDado()<<" Altura = "<<node->getH()<<endl;
+
+
     }
 
 private:
     Node* root=NULL;
-    DynamicList<string> dl;
-    string palavra="";
-    int tamanhoFrase;
 
-    void insertNewNode(string a,Node* no)
+    Node* insertNode(Node* node,string word)
     {
-        if(no->getDado()>a)
+
+        if(!node)
         {
-            if(no->getLeft())
-                insertNewNode(a,no->getLeft());
-            else
-                no->setLeft(new Node(a));
+            node=new Node(word);
+            return node;
+
+        }
+        else if(word < node->getDado())
+        {
+
+            node->setLeft(insertNode(node->getLeft(),word));
+            node->setH(calculateHeight(node));
+
+
         }
         else
         {
-            if(no->getRight())
-                insertNewNode(a,no->getRight());
-            else
-                no->setRight(new Node(a));
+            node->setRight(insertNode(node->getRight(),word));
+            node->setH(calculateHeight(node));
         }
 
-    }
+        node->setH(calculateHeight(node));
 
-    void fraseParaPalavra(char frase[])
-    {
-        for(int i=0; i<tamanhoFrase; i++)
+        int aux=getbF(node);
+
+        if(aux==2){
+            if(getbF(node->getLeft())<0)
+                return doubleRotateRight(node);
+            else
+                return rotateRight(node);
+        }
+        else if(aux==-2)
         {
-            if(frase[i]<65 )
-            {
-                if(palavra!="")
-                    dl.inserir(palavra);
-                palavra="";
-            }
+            if(getbF(node->getRight())>0)
+                return doubleRotateLeft(node);
             else
-            {
-                if(frase[i]>=65 && frase[i]<=90)
-                    frase[i]+=32;
-                palavra+=frase[i];
-
-                if(i+1==tamanhoFrase)
-                {
-                    dl.inserir(palavra);
-                    palavra="";
-                }
-            }
+                return rotateLeft(node);
         }
 
 
     }
 
+    Node* rotateRight(Node* x)
+    {
+        cout<<"Roda para direita"<<endl;
+        Node* aux = x->getLeft();
+        x->setLeft(x->getLeft()->getRight());
+        aux->setRight(x);
+        aux->setH(calculateHeight(aux));
+        x->setH(calculateHeight(x));
+        return aux;
+    }
+
+    Node* rotateLeft(Node* x)
+    {
+        cout<<"Roda para esquerda"<<endl;
+        Node* aux = x->getRight();
+        x->setRight(x->getRight()->getLeft());
+        aux->setLeft(x);
+
+        aux->setH(calculateHeight(aux));
+        x->setH(calculateHeight(x));
+        return aux;
+    }
+
+    Node* doubleRotateLeft(Node* x)
+    {
+        x->setRight(rotateRight(x->getRight()));
+        x= rotateLeft(x);
+        return x;
+    }
+
+    Node* doubleRotateRight(Node* x)
+    {
+        x->setLeft(rotateLeft(x->getLeft()));
+        x=rotateRight(x);
+        return x;
+
+    }
+
+    /*  Node* balance(Node* node)
+      {
+          Node* aux=node;
+          if(node->getBf()== 2)
+          {
+              if((node->getLeft())->getBf()<0)
+                  aux = doubleRotateLeft(node);
+              else
+                  aux = rotateLeft(node);
+          }
+          else if(node->getBf()== -2)
+          {
+              if((node->getRight())->getBf()>0)
+                  aux = doubleRotateRight(node);
+              else
+                  aux = rotateRight(node);
+          }
+
+          return aux;
+      }*/
+
+    int calculateHeight(Node* node)
+    {
+
+        if (node == NULL)
+            return 0; // altura da árvore vazia
+        else
+        {
+            int l = calculateHeight (node->getLeft());
+            int r = calculateHeight (node->getRight());
+            if (l < r)
+                return r + 1;
+            else
+                return l + 1;
+        }
+
+    }
+
+    int getbF(Node* node)
+    {
+        if(node->getLeft() && !node->getRight())
+        {
+                return node->getLeft()->getH()-0;
+        }
+        else if(!node->getLeft() && node->getRight())
+        {
+                return 0-node->getRight()->getH();
+        }
+        else
+        {
+                return node->getLeft()->getH()-node->getRight()->getH();
+        }
+
+    }
 };
 
 #endif // ABINARY_H

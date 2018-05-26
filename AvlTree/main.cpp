@@ -1,5 +1,4 @@
 #include <iostream>
-#include <fstream>
 #include "ABinary.hpp"
 #include "TreeDAO.h"
 
@@ -7,10 +6,13 @@ using namespace std;
 int main()
 {
     TreeDAO t;
-    ABinary ab;
-    ab.setList();
-    ab.printLista();
-
+    ABinary a;
+    a.insertNode("d");
+   // a.insertNode("b");
+   // a.insertNode("c");
+    a.insertNode("f");
+    a.insertNode("e");
+    a.a();
 
     return 0;
 }
