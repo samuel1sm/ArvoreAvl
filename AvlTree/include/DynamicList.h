@@ -21,6 +21,8 @@ class DynamicList
             }
         }
 
+        NodeList<T>* getHead(){return head;}
+
     private:
         NodeList<T>* head=NULL;
         NodeList<T>* tail=NULL;

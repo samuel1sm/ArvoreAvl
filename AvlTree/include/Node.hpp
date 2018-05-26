@@ -24,7 +24,7 @@ class Node
     private:
         Node* left;
         Node* right;
-        int height;
+        int indice;
         string dado;
         DynamicList<int> pag;
 };
