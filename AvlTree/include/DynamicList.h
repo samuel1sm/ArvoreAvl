@@ -21,6 +21,13 @@ class DynamicList
             }
         }
 
+        NodeList<T>* getHead(){return head;}
+
+        void clearList(){
+            head=NULL;
+            tail=NULL;
+        }
+
     private:
         NodeList<T>* head=NULL;
         NodeList<T>* tail=NULL;

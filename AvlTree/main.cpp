@@ -7,12 +7,10 @@ int main()
 {
     TreeDAO t;
     ABinary a;
-    a.insertNode("d");
-   // a.insertNode("b");
-   // a.insertNode("c");
-    a.insertNode("f");
-    a.insertNode("e");
-    a.a();
+    a.setKeys();
+    a.checkText();
+
+    a.showTree();
 
     return 0;
 }

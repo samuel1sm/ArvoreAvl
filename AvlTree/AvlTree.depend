@@ -1,25 +1,29 @@
 # depslib dependency file v1.0
-1526521156 source:d:\faculdade\code blocks\avltree\main.cpp
+1527617873 source:d:\faculdade\code blocks\avltree\main.cpp
 	<iostream>
 	"ABinary.hpp"
 	"TreeDAO.h"
 
-1526523206 d:\faculdade\code blocks\avltree\include\abinary.hpp
+1527621140 d:\faculdade\code blocks\avltree\include\abinary.hpp
 	"Node.hpp"
+	"TreeDAO.h"
+	"NodeList.h"
+	<string.h>
 
-1526523880 d:\faculdade\code blocks\avltree\include\node.hpp
+1527612177 d:\faculdade\code blocks\avltree\include\node.hpp
 	"DynamicList.h"
 
-1526523528 d:\faculdade\code blocks\avltree\include\treedao.h
+1527621116 d:\faculdade\code blocks\avltree\include\treedao.h
 	<iostream>
 	<fstream>
-	<vector>
 	"DynamicList.h"
-
-1526523493 d:\faculdade\code blocks\avltree\include\dynamiclist.h
+	"Node.hpp"
 	"NodeList.h"
 
-1526523478 d:\faculdade\code blocks\avltree\include\nodelist.h
+1527615867 d:\faculdade\code blocks\avltree\include\dynamiclist.h
+	"NodeList.h"
+
+1527620289 d:\faculdade\code blocks\avltree\include\nodelist.h
 
 1527301632 source:d:\faculdade\code blocks\arvoreavl\avltree\main.cpp
 	<iostream>

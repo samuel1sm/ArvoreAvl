@@ -1,6 +1,10 @@
 #ifndef ABINARY_H
 #define ABINARY_H
 #include "Node.hpp"
+#include "TreeDAO.h"
+#include "NodeList.h"
+#include <string.h>
+
 
 using namespace std;
 class ABinary
@@ -10,69 +14,141 @@ public:
 
     void insertNode(string a)
     {
+
         root=insertNode(root,a);
-    }
-    void a()
-    {
-
-        a(root);
 
     }
-
-     void a(Node* node)
+    void showTree()
     {
-        if(node->getLeft())
-            a(node->getLeft());
-        if(node->getRight())
-            a(node->getRight());
-        cout<<node->getDado()<<" Altura = "<<node->getH()<<endl;
+        showTree(root);
+    }
 
+    void setKeys()
+    {
+        NodeList<string>* aux = td.readKeys().getHead();
+        while(aux!=NULL)
+        {
+            tamanhoFrase=aux->getFrase().length();
+            char aux2[tamanhoFrase];
+            strcpy(aux2,aux->getFrase().c_str());
+            fraseParaPalavra(aux2,true);
+
+            aux=aux->getNoNext();
+        }
+
+
+    }
+
+    void checkText()
+    {
+        NodeList<string>* aux = td.readText().getHead();
+        while(aux!=NULL)
+        {
+            tamanhoFrase=aux->getFrase().length();
+            char aux2[tamanhoFrase];
+            strcpy(aux2,aux->getFrase().c_str());
+            fraseParaPalavra(aux2,false);
+
+            comparePhrase();
+
+            aux=aux->getNoNext();
+        }
 
     }
 
 private:
     Node* root=NULL;
+    TreeDAO td;
+    DynamicList<string> dl;
+    string palavra="";
+    int linha=1;
+    int tamanhoFrase;
+
+    void comparePhrase()
+    {
+        NodeList<string>* aux = dl.getHead();
+        while(aux!=NULL)
+        {
+            serchWord(root,aux->getFrase());
+
+            aux=aux->getNoNext();
+        }
+        dl.clearList();
+        linha++;
+    }
+
+    void serchWord(Node* node,string word)
+    {
+        if(node!=NULL)
+        {
+            if(word==node->getDado())
+                node->setPag(linha);
+            else
+            {
+                if(word<node->getDado())
+                    serchWord(node->getLeft(),word);
+                else
+                    serchWord(node->getRight(),word);
+            }
+        }
+
+    }
+
+    void showTree(Node* node)
+    {
+
+        if(node->getLeft())
+            showTree(node->getLeft());
+        if(node->getRight())
+            showTree(node->getRight());
+        td.write(node);
+
+        cout<<node->getDado()<<": Altura = "<<node->getH()<<endl;
+
+
+    }
 
     Node* insertNode(Node* node,string word)
     {
 
         if(!node)
         {
-            node=new Node(word);
-            return node;
-
+            return new Node(word);
         }
         else if(word < node->getDado())
         {
 
             node->setLeft(insertNode(node->getLeft(),word));
-            node->setH(calculateHeight(node));
-
 
         }
         else
         {
             node->setRight(insertNode(node->getRight(),word));
-            node->setH(calculateHeight(node));
-        }
 
+        }
         node->setH(calculateHeight(node));
 
-        int aux=getbF(node);
-
-        if(aux==2){
-            if(getbF(node->getLeft())<0)
-                return doubleRotateRight(node);
-            else
-                return rotateRight(node);
-        }
-        else if(aux==-2)
+        if(node->getH()!=1)
         {
-            if(getbF(node->getRight())>0)
-                return doubleRotateLeft(node);
-            else
-                return rotateLeft(node);
+            int aux=getbF(node);
+            if(aux==2)
+            {
+                if(getbF(node->getLeft())<0)
+                    return doubleRotateRight(node);
+                else
+                    return rotateRight(node);
+            }
+            else if(aux==-2)
+            {
+                if(getbF(node->getRight())>0)
+                    return doubleRotateLeft(node);
+                else
+                    return rotateLeft(node);
+            }
         }
+        return node;
+
+
 
 
     }
@@ -115,32 +191,12 @@ private:
 
     }
 
-    /*  Node* balance(Node* node)
-      {
-          Node* aux=node;
-          if(node->getBf()== 2)
-          {
-              if((node->getLeft())->getBf()<0)
-                  aux = doubleRotateLeft(node);
-              else
-                  aux = rotateLeft(node);
-          }
-          else if(node->getBf()== -2)
-          {
-              if((node->getRight())->getBf()>0)
-                  aux = doubleRotateRight(node);
-              else
-                  aux = rotateRight(node);
-          }
-
-          return aux;
-      }*/
 
     int calculateHeight(Node* node)
     {
 
         if (node == NULL)
-            return 0; // altura da árvore vazia
+            return 0;
         else
         {
             int l = calculateHeight (node->getLeft());
@@ -155,18 +211,55 @@ private:
 
     int getbF(Node* node)
     {
+
         if(node->getLeft() && !node->getRight())
         {
-                return node->getLeft()->getH()-0;
+            return node->getLeft()->getH()-0;
         }
         else if(!node->getLeft() && node->getRight())
         {
-                return 0-node->getRight()->getH();
+            return 0-node->getRight()->getH();
         }
         else
         {
-                return node->getLeft()->getH()-node->getRight()->getH();
+            return node->getLeft()->getH()-node->getRight()->getH();
         }
+
+    }
+
+    void fraseParaPalavra(char frase[],bool modo)
+    {
+        for(int i=0; i<tamanhoFrase; i++)
+        {
+            if(frase[i]<65 && frase[i]!='-' )
+            {
+                if(palavra!="")
+                {
+                    if(modo)
+                        insertNode(palavra);
+                    else
+                        dl.inserir(palavra);
+                }
+
+                palavra="";
+            }
+            else
+            {
+                if(frase[i]>=65 && frase[i]<=90)
+                    frase[i]+=32;
+                palavra+=frase[i];
+
+                if(i+1==tamanhoFrase)
+                {
+                    if(modo)
+                        insertNode(palavra);
+                    else
+                        dl.inserir(palavra);
+                    palavra="";
+                }
+            }
+        }
+
 
     }
 };
