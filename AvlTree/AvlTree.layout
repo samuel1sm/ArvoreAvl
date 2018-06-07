@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
-	<ActiveTarget name="Debug" />
-	<File name="include\ABinary.hpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+	<ActiveTarget name="Release" />
+	<File name="include\DynamicList.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="833" topLine="33" />
+			<Cursor1 position="587" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="include\Node.hpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="462" topLine="13" />
 		</Cursor>
 	</File>
 	<File name="include\NodeList.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
@@ -12,24 +17,31 @@
 			<Cursor1 position="191" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="include\Node.hpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
+	<File name="include\ABinary.hpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="462" topLine="19" />
+			<Cursor1 position="7033" topLine="21" />
 		</Cursor>
-	</File>
-	<File name="include\DynamicList.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="587" topLine="0" />
-		</Cursor>
+		<Folding>
+			<Collapse line="68" />
+			<Collapse line="81" />
+			<Collapse line="98" />
+			<Collapse line="114" />
+			<Collapse line="159" />
+			<Collapse line="170" />
+			<Collapse line="182" />
+			<Collapse line="189" />
+			<Collapse line="198" />
+			<Collapse line="215" />
+		</Folding>
 	</File>
 	<File name="include\TreeDAO.h" open="1" top="1" tabpos="6" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="680" topLine="0" />
+			<Cursor1 position="1181" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="main.cpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="174" topLine="0" />
+			<Cursor1 position="150" topLine="0" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>
