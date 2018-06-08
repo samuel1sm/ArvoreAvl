@@ -10,7 +10,6 @@ class NodeList
 public:
     NodeList(T f)
     {
-                setlocale (LC_ALL,"Portuguese");
 
         frase=f;
         noNext=NULL;
@@ -19,22 +18,18 @@ public:
 
     NodeList<T>* getNoNext()
     {
-        setlocale (LC_ALL,"Portuguese");
         return noNext;
     }
     T getFrase()
     {
-        setlocale (LC_ALL,"Portuguese");
         return frase;
     }
     void setNoNext(NodeList* a )
     {
-        setlocale (LC_ALL,"Portuguese");
         noNext =a;
     }
     void setFrase(T a)
     {
-        setlocale (LC_ALL,"Portuguese");
         frase = a;
     }
 

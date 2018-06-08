@@ -11,7 +11,6 @@ class DynamicList
 public:
     void inserir(T a)
     {
-        setlocale (LC_ALL,"Portuguese");
         if(!head)
         {
             head= new NodeList<T>(a);
@@ -26,14 +25,12 @@ public:
 
     NodeList<T>* getHead()
     {
-        setlocale (LC_ALL,"Portuguese");
         return head;
     }
 
     void clearList()
     {
 
-        setlocale (LC_ALL,"Portuguese");
 
         head=NULL;
         tail=NULL;

@@ -15,7 +15,6 @@ public:
 
     void insertNode(string a)
     {
-        setlocale (LC_ALL,"Portuguese");
 
         root=insertNode(root,a);
 
@@ -23,7 +22,6 @@ public:
     void showTree()
 
     {
-        setlocale (LC_ALL,"Portuguese");
 
         showTree(root);
     }
@@ -31,11 +29,13 @@ public:
     void setKeys()
 
     {
-        setlocale (LC_ALL,"Portuguese");
 
         NodeList<string>* aux = td.readKeys().getHead();
         while(aux!=NULL)
         {
+
+            if(wordSize<aux->getFrase().length())
+                wordSize=aux->getFrase().length();
 
             tamanhoFrase=aux->getFrase().length();
             char aux2[tamanhoFrase];
@@ -43,7 +43,6 @@ public:
 
             strcpy(aux2,aux->getFrase().c_str());
 
-            setlocale (LC_ALL,"Portuguese");
 
             fraseParaPalavra(aux2,true);
 
@@ -57,11 +56,11 @@ public:
 
 
     {
-        setlocale (LC_ALL,"Portuguese");
 
         NodeList<string>* aux = td.readText().getHead();
         while(aux!=NULL)
         {
+
             tamanhoFrase=aux->getFrase().length();
             char aux2[tamanhoFrase];
             strcpy(aux2,aux->getFrase().c_str());
@@ -82,10 +81,10 @@ private:
     int linha=1;
     int tamanhoFrase;
     bool keyNumber = false;
+    int wordSize=0;
 
     void comparePhrase()
     {
-        setlocale (LC_ALL,"Portuguese");
 
         NodeList<string>* aux = dl.getHead();
         while(aux!=NULL)
@@ -100,7 +99,6 @@ private:
 
     void serchWord(Node* node,string word)
     {
-        setlocale (LC_ALL,"Portuguese");
 
         if(node!=NULL)
         {
@@ -119,15 +117,13 @@ private:
 
     void showTree(Node* node)
     {
-        setlocale (LC_ALL,"Portuguese");
-
 
         if(node->getLeft())
             showTree(node->getLeft());
 
-        td.write(node);
-
+        td.write(node,wordSize);
         //cout<<node->getDado()<<": Altura = "<<node->getH()<<endl;
+
         if(node->getRight())
             showTree(node->getRight());
 
@@ -137,8 +133,6 @@ private:
 
     Node* insertNode(Node* node,string word)
     {
-        setlocale (LC_ALL,"Portuguese");
-
 
         if(!node)
         {
@@ -184,7 +178,6 @@ private:
 
     Node* rotateRight(Node* x)
     {
-        setlocale (LC_ALL,"Portuguese");
 
         cout<<"Roda para direita"<<endl;
         Node* aux = x->getLeft();
@@ -197,7 +190,6 @@ private:
 
     Node* rotateLeft(Node* x)
     {
-        setlocale (LC_ALL,"Portuguese");
 
         cout<<"Roda para esquerda"<<endl;
         Node* aux = x->getRight();
@@ -211,7 +203,6 @@ private:
 
     Node* doubleRotateLeft(Node* x)
     {
-        setlocale (LC_ALL,"Portuguese");
 
         x->setRight(rotateRight(x->getRight()));
         x= rotateLeft(x);
@@ -220,7 +211,6 @@ private:
 
     Node* doubleRotateRight(Node* x)
     {
-        setlocale (LC_ALL,"Portuguese");
 
         x->setLeft(rotateLeft(x->getLeft()));
         x=rotateRight(x);
@@ -230,7 +220,6 @@ private:
 
     int calculateHeight(Node* node)
     {
-        setlocale (LC_ALL,"Portuguese");
 
         if (node == NULL)
             return 0;
@@ -248,7 +237,6 @@ private:
 
     int getbF(Node* node)
     {
-        setlocale (LC_ALL,"Portuguese");
 
         if(node->getLeft() && !node->getRight())
         {
@@ -268,14 +256,11 @@ private:
     void fraseParaPalavra(char frase[],bool modo)
     {
 
-
-        setlocale (LC_ALL,"Portuguese");
-
+        setlocale (LC_ALL,"");
         for(int i=0; i<tamanhoFrase; i++)
         {
-            if((frase[i]<'a' ||  frase[i]>'z') &&  (frase[i]<'A' || frase[i]>'Z') && frase[i]!='é' )/*&&  (frase[i]<128 || frase[i]>144) && (frase[i]<'0' || frase[i]>'9')
-                    && (frase[i]<147 || frase[i]>154) && (frase[i]<160 || frase[i]>165) && (frase[i]<181 || frase[i]>183) && (frase[i]<198 || frase[i]>199)
-                    && (frase[i]<210 || frase[i]>216) && (frase[i]<226 || frase[i]>229) && (frase[i]<233 || frase[i]>235) && frase[i]!='-' && frase[i]!=224 )*/
+            if(!isalnum(frase[i]) && frase[i]!='-' && (frase[i]<'0' || frase[i]>'9') && frase[i]!='`')
+
             {
                 if(palavra!="")
                 {
@@ -290,37 +275,28 @@ private:
                 palavra="";
 
             }
-            else if(frase[i]>='0' && frase[i]<='9')
-            {
-                if(frase[i-1]!=' ' || keyNumber==true)
-                {
 
-                    palavra+=frase[i];
-
-                    keyNumber=true;
-
-                    if(i+1==tamanhoFrase)
-                    {
-                        palavra = compareApostrophe();
-
-                        if(modo)
-                            insertNode(palavra);
-                        else
-                            dl.inserir(palavra);
-                        keyNumber=false;
-                        palavra="";
-                    }
-
-                }
-
-            }
             else
             {
-
+                locale loc;
                 if(frase[i]>=65 && frase[i]<=90)
                     frase[i]+=32;
-                palavra+=frase[i];
+               // if(isalnum(frase[i]))
+                //    tolower(frase[i],loc);
 
+
+                if(frase[i]>='0' && frase[i]<='9')
+                {
+                    if((frase[i-1]!=' ' && (frase[i-1]<'0' || frase[i-1]>'9')) || keyNumber==true)
+                    {
+                        palavra+=frase[i];
+                        keyNumber=true;
+                    }
+                }
+                else
+                {
+                    palavra+=frase[i];
+                }
 
                 if(i+1==tamanhoFrase)
                 {
@@ -338,11 +314,9 @@ private:
 
     }
 
+
     string compareApostrophe()
     {
-
-
-        setlocale (LC_ALL,"Portuguese");
 
         char aux [palavra.length()];
         strcpy(aux,palavra.c_str());

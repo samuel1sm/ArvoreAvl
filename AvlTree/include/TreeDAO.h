@@ -15,7 +15,7 @@ class TreeDAO
 {
 public:
     TreeDAO() {}
-    void write(Node* node)
+    void write(Node* node,int wordSize)
     {
       /*                  setlocale (LC_ALL,"Portuguese");
 
@@ -42,11 +42,20 @@ public:
         }
 
         myfile.close();*/
-                                setlocale (LC_ALL,"Portuguese");
 
 
             if(node->getPag().getHead()!=NULL){
-                cout<<node->getDado() <<" : ";
+                string word = node->getDado() ;
+                int auxTam = wordSize - word.length() +4;
+
+                for(int i = 0; i<auxTam; i++)
+                {
+                    word+=' ';
+                }
+
+                cout<<word ;
+
+
                 NodeList<int>* aux = node->getPag().getHead();
                 while(aux!=NULL)
                 {
@@ -63,7 +72,6 @@ public:
 
     DynamicList<string> readText()
     {
-                setlocale (LC_ALL,"Portuguese");
 
         dl.clearList();
         string line;
@@ -72,7 +80,6 @@ public:
         {
             while ( getline (myfile,line) )
             {
-       //                         cout<<line<<endl;
 
                 dl.inserir(line);
             }
@@ -85,7 +92,6 @@ public:
     }
     DynamicList<string> readKeys()
     {
-        setlocale (LC_ALL,"Portuguese");
 
         dl.clearList();
         string line;
@@ -94,7 +100,6 @@ public:
         {
             while ( getline (myfile,line) )
             {
-       //         cout<<line<<endl;
                 dl.inserir(line);
             }
             myfile.close();

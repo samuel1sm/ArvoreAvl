@@ -5,18 +5,18 @@
 	"TreeDAO.h"
 	<locale>
 
-1528398360 d:\faculdade\code blocks\avltree\include\abinary.hpp
+1528490477 d:\faculdade\code blocks\avltree\include\abinary.hpp
 	"Node.hpp"
 	"TreeDAO.h"
 	"NodeList.h"
 	<string.h>
 	<locale>
 
-1528393734 d:\faculdade\code blocks\avltree\include\node.hpp
+1528482071 d:\faculdade\code blocks\avltree\include\node.hpp
 	"DynamicList.h"
 	<locale>
 
-1528394679 d:\faculdade\code blocks\avltree\include\treedao.h
+1528490091 d:\faculdade\code blocks\avltree\include\treedao.h
 	<iostream>
 	<fstream>
 	"DynamicList.h"
@@ -24,11 +24,11 @@
 	"NodeList.h"
 	<locale>
 
-1528394500 d:\faculdade\code blocks\avltree\include\dynamiclist.h
+1528453918 d:\faculdade\code blocks\avltree\include\dynamiclist.h
 	"NodeList.h"
 	<locale>
 
-1528391088 d:\faculdade\code blocks\avltree\include\nodelist.h
+1528453870 d:\faculdade\code blocks\avltree\include\nodelist.h
 	<locale>
 
 1527301632 source:d:\faculdade\code blocks\arvoreavl\avltree\main.cpp

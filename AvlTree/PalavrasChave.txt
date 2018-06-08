@@ -69,3 +69,5 @@ definitiva
 fim
 pequeno
 velocidade
+carro
+carro23
