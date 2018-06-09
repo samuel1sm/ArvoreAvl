@@ -1,11 +1,11 @@
 # depslib dependency file v1.0
-1528389758 source:d:\faculdade\code blocks\avltree\main.cpp
+1528573064 source:d:\faculdade\code blocks\avltree\main.cpp
 	<iostream>
 	"ABinary.hpp"
 	"TreeDAO.h"
 	<locale>
 
-1528490477 d:\faculdade\code blocks\avltree\include\abinary.hpp
+1528573908 d:\faculdade\code blocks\avltree\include\abinary.hpp
 	"Node.hpp"
 	"TreeDAO.h"
 	"NodeList.h"

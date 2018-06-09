@@ -19,11 +19,12 @@ public:
         root=insertNode(root,a);
 
     }
-    void showTree()
+    void showData(bool key)
 
     {
-
-        showTree(root);
+        cout<<"-------------------------------------------------"<<endl;
+        showData(root,key);
+        cout<<"-------------------------------------------------"<<endl;
     }
 
     void setKeys()
@@ -115,17 +116,20 @@ private:
 
     }
 
-    void showTree(Node* node)
+
+    void showData(Node* node,bool key)
     {
 
         if(node->getLeft())
-            showTree(node->getLeft());
+            showData(node->getLeft(),key);
 
-        td.write(node,wordSize);
-        //cout<<node->getDado()<<": Altura = "<<node->getH()<<endl;
+        if(key)
+            td.write(node,wordSize);
+        else
+            cout<<node->getDado()<<": Altura = "<<node->getH()<<endl;
 
         if(node->getRight())
-            showTree(node->getRight());
+            showData(node->getRight(),key);
 
 
 
@@ -278,12 +282,8 @@ private:
 
             else
             {
-                locale loc;
-                if(frase[i]>=65 && frase[i]<=90)
-                    frase[i]+=32;
-               // if(isalnum(frase[i]))
-                //    tolower(frase[i],loc);
 
+                frase[i]= lowerCase(frase[i]);
 
                 if(frase[i]>='0' && frase[i]<='9')
                 {
@@ -318,6 +318,7 @@ private:
     string compareApostrophe()
     {
 
+
         char aux [palavra.length()];
         strcpy(aux,palavra.c_str());
         string aux2="";
@@ -332,6 +333,22 @@ private:
 
         return aux2;
 
+    }
+
+     char lowerCase(char aux){
+        string vetorMaiusculas = "ÇÄÅÉÆÖÜÑÁÂÀÃÊËÈÓÔÒÕÚÛÙÝ";
+        string vetorMinusculas = "çäåéæöüñáâàãêëèóôòõúûùý";
+
+        for(int i = 0; i<vetorMaiusculas.length();i++)
+        {
+            if(aux == vetorMaiusculas.at(i))
+                return vetorMinusculas.at(i);
+        }
+
+        if(aux>=65 && aux<=90)
+            return aux + 32;
+         else
+            return aux;
     }
 };
 
